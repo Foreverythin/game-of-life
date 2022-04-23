@@ -24,7 +24,7 @@
 					],
 					"linkLibraries" : []
 				},
-				"path" : "/Library/Developer/CommandLineTools/usr/bin/cc",
+				"path" : "/usr/bin/gcc",
 				"version" : "13.1.6.13160021"
 			},
 			"language" : "C",

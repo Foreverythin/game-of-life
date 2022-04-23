@@ -2,7 +2,7 @@
 #include <SDL2/SDL.H>
 
 int main(void){
-    printf("df");
+    printf("dfj");
 
     return 0;
 }
