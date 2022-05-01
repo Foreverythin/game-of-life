@@ -30,10 +30,10 @@ int main(int argc, char **argv) {
     }
 
     game(world);
-    for (int i = 0; i < row; i++){
-        free(world[i]);
-    }
-    free(world);
+//    for (int i = 0; i < row; i++){
+//        free(world[i]);
+//    }
+//    free(world);
 
     return 0;
 }
