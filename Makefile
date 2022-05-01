@@ -4,8 +4,10 @@
 EXE_DIR = bin
 EXE = $(EXE_DIR)/GameOfLife
 
-SRC_DIR = ./src
-SRC = main.c
+SRC_DIR = src
+SRC = main.c $(SRC_DIR)/fileIO.c $(SRC_DIR)/game.c $(SRC_DIR)/utility.c
+
+INCLUDE_DIR = ./include
 
 # generic build details
 
@@ -35,3 +37,6 @@ clean:
 # dependencies
 
 main.o: main.c
+fileiIO.o: $(SRC_DIR)/fileIO.c $(INCLUDE_DIR)/fileIO.h
+game.o: $SRC_DIR/game.c $(INCLUDE_DIR)/game.h
+util.o: $(SRC_DIR)/utility.c $(INCLUDE_DIR)/utility.h
