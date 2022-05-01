@@ -77,14 +77,8 @@ void game(char **world) {
             }
         }
     }
-    for (int i = 0; i < row; i++){
-        free(world[i]);
-    }
-    free(world);
-    for (int i = 0; i < row; i ++){
-        world[i] = newWorld[i];
-    }
-    world = newWorld;
+    freeWorld(world);
+    copyWorld(world, newWorld);
     printf("\n");
     for (int i = 0; i < row; i++) {
         for (int j = 0; j < column; j++) {
@@ -94,9 +88,6 @@ void game(char **world) {
             }
         }
     }
-    for (int i = 0; i < row; i++){
-        free(world[i]);
-    }
-    free(world);
+    freeWorld(world);
 
 }
