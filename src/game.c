@@ -4,6 +4,30 @@
 #include "../include/game.h"
 #include "../include/utility.h"
 
+void freeWorld(char **world) {
+    for (int i = 0; i < row; i++) {
+        free(world[i]);
+    }
+    free(world);
+    world = NULL;
+}
+
+int compareWorld(char **world, char **newWorld) {
+    int numEqual = 0;
+    for (int i = 0; i < row; i++) {
+        for (int j = 0; j < column; j++) {
+            if (world[i][j] == newWorld[i][j]) {
+                numEqual++;
+            }
+        }
+    }
+    if (numEqual == (row * column)) {
+        return 1;
+    } else {
+        return 0;
+    }
+}
+
 char **nextGeneration(char **world) {
     char **newWorld = (char **) malloc(sizeof(char *) * row);
     for (int i = 0; i < row; i++) {
@@ -54,9 +78,9 @@ void game(char **world) {
             }
         }
     }*/
-    char *evolveNumberString = (char *) malloc(sizeof(char) * 10);
+    char *evolveNumberString = (char *) malloc(sizeof(char) * 120);
     printf("Please enter the number of steps to evolve\n(enter the letter 'q' means not to specify the number)\n->");
-    scanf("%s", evolveNumberString);
+    gets(evolveNumberString);
     while (isNumber(evolveNumberString) != 1 && strcmp(evolveNumberString, "q") != 0) {
         printf("Invalid choice!\nPlease enter a number or the letter 'q':\n->");
         scanf("%s", evolveNumberString);
@@ -68,26 +92,59 @@ void game(char **world) {
         specifyEvolve = atoi(evolveNumberString);
     }
 
-    char** newWorld = nextGeneration(world);
-    for (int i = 0; i < row; i++) {
-        for (int j = 0; j < column; j++) {
-            printf("%c ", newWorld[i][j]);
-            if (j == column - 1) {
-                printf("\n");
+    if (specifyEvolve == -1) {
+        int steps = 0;
+        while (1) {
+            char **newWorld = nextGeneration(world);
+            printf("\n");
+            if (compareWorld(world, newWorld) == 1) {
+                printf("A total of %d rounds of cell evolution is stabilized", steps);
+                freeWorld(newWorld);
+                break;
             }
-        }
-    }
-    freeWorld(world);
-    copyWorld(world, newWorld);
-    printf("\n");
-    for (int i = 0; i < row; i++) {
-        for (int j = 0; j < column; j++) {
-            printf("%c ", world[i][j]);
-            if (j == column - 1) {
-                printf("\n");
+            freeWorld(world);
+            world = newWorld;
+            newWorld = NULL;
+            for (int i = 0; i < row; i++) {
+                for (int j = 0; j < column; j++) {
+                    printf("%c ", world[i][j]);
+                    if (j == column - 1) {
+                        printf("\n");
+                    }
+                }
             }
+            steps++;
         }
+    }else{
+        int steps = 0;
+        int leftEvolve = specifyEvolve;
+        while (leftEvolve > 0){
+            char **newWorld = nextGeneration(world);
+            printf("\n");
+            if (compareWorld(world, newWorld) == 1) {
+                printf("A total of %d rounds of cell evolution is stabilized", steps);
+                freeWorld(newWorld);
+                break;
+            }
+            freeWorld(world);
+            world = newWorld;
+            newWorld = NULL;
+            for (int i = 0; i < row; i++) {
+                for (int j = 0; j < column; j++) {
+                    printf("%c ", world[i][j]);
+                    if (j == column - 1) {
+                        printf("\n");
+                    }
+                }
+            }
+            steps++;
+            leftEvolve--;
+        }
+        printf("按照要求，一共迭代了%d次。", specifyEvolve);
     }
+    
     freeWorld(world);
+    free(evolveNumberString);
+    evolveNumberString = NULL;
 
 }
