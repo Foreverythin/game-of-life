@@ -1,8 +1,10 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <stdbool.h>
 #include "../include/game.h"
 #include "../include/utility.h"
+#include "../include/interface.h"
 
 void freeWorld(char **world) {
     for (int i = 0; i < row; i++) {
@@ -12,7 +14,7 @@ void freeWorld(char **world) {
     world = NULL;
 }
 
-int compareWorld(char **world, char **newWorld) {
+bool compareWorld(char **world, char **newWorld) {
     int numEqual = 0;
     for (int i = 0; i < row; i++) {
         for (int j = 0; j < column; j++) {
@@ -22,9 +24,9 @@ int compareWorld(char **world, char **newWorld) {
         }
     }
     if (numEqual == (row * column)) {
-        return 1;
+        return true;
     } else {
-        return 0;
+        return false;
     }
 }
 
@@ -78,10 +80,11 @@ void game(char **world) {
             }
         }
     }*/
+
     char *evolveNumberString = (char *) malloc(sizeof(char) * 120);
     printf("Please enter the number of steps to evolve\n(enter the letter 'q' means not to specify the number)\n->");
-    gets(evolveNumberString);
-    while (isNumber(evolveNumberString) != 1 && strcmp(evolveNumberString, "q") != 0) {
+    scanf("%s", evolveNumberString);
+    while (isNumber(evolveNumberString) == false && strcmp(evolveNumberString, "q") != 0) {
         printf("Invalid choice!\nPlease enter a number or the letter 'q':\n->");
         scanf("%s", evolveNumberString);
     }
@@ -92,59 +95,179 @@ void game(char **world) {
         specifyEvolve = atoi(evolveNumberString);
     }
 
-    if (specifyEvolve == -1) {
-        int steps = 0;
-        while (1) {
-            char **newWorld = nextGeneration(world);
-            printf("\n");
-            if (compareWorld(world, newWorld) == 1) {
-                printf("A total of %d rounds of cell evolution is stabilized", steps);
-                freeWorld(newWorld);
+//    SDL_Event e;
+//    if (specifyEvolve == -1) {
+//        int steps = 0;
+//        char **newWorld = NULL;
+//        while (SDL_WaitEvent(&e)) {
+//            switch (e.type) {
+//                case SDL_QUIT:
+//                    closeSDL();
+//                    break;
+//                default: {
+//                    newWorld = nextGeneration(world);
+//                    if (compareWorld(world, newWorld)) {
+//                        printf("A total of %d rounds of cell evolution is stabilized.\n", steps);
+//                        freeWorld(newWorld);
+//                        while (SDL_WaitEvent(&e)) {
+//                            switch (e.type) {
+//                                case SDL_QUIT:
+//                                    closeSDL();
+//                                    break;
+//                                default:
+//                                    break;
+//                            }
+//                        }
+//                        break;
+//                    }
+//                    freeWorld(world);
+//                    world = newWorld;
+//                    newWorld = NULL;
+//                    SDL_Delay(100);
+//                    drawWorld(world, row, column, unitLength);
+//                    steps++;
+//                }
+//            }
+//        }
+//    } else {
+//        int steps = 0;
+//        int leftEvolve = specifyEvolve;
+//        char **newWorld = NULL;
+//        while (SDL_WaitEvent(&e)) {
+//            switch (e.type) {
+//                case SDL_QUIT:
+//                    closeSDL();
+//                    break;
+//                default: {
+//                    newWorld = nextGeneration(world);
+//                    if (compareWorld(world, newWorld)) {
+//                        printf("A total of %d rounds of cell evolution is stabilized", steps);
+//                        freeWorld(newWorld);
+//                        while(SDL_WaitEvent(&e)){
+//                            switch (e.type) {
+//                                case SDL_QUIT:
+//                                    closeSDL();
+//                                    break;
+//                                default:
+//                                    break;
+//                            }
+//                        }
+//                        break;
+//                    }
+//                    freeWorld(world);
+//                    world = newWorld;
+//                    newWorld = NULL;
+//                    SDL_Delay(100);
+//                    drawWorld(world, row, column, unitLength);
+//                    steps++;
+//                    leftEvolve--;
+//                    if (leftEvolve == 0){
+//                        while(SDL_WaitEvent(&e)){
+//                            switch (e.type) {
+//                                case SDL_QUIT:
+//                                    closeSDL();
+//                                    break;
+//                                default:
+//                                    break;
+//                            }
+//                        }
+//                    }
+//                    break;
+//                }
+//            }
+//        }
+//        printf("按照要求，一共迭代了%d次。", specifyEvolve);
+//    }
+
+
+
+    int steps = 0;
+    int leftEvolve = specifyEvolve;
+    SDL_Event e;
+    char** newWorld;
+    int flag = 1;
+    int tag = 1;
+    while(SDL_WaitEvent(&e)){
+        switch (e.type) {
+            case SDL_QUIT:
+                closeSDL();
                 break;
-            }
-            freeWorld(world);
-            world = newWorld;
-            newWorld = NULL;
-            for (int i = 0; i < row; i++) {
-                for (int j = 0; j < column; j++) {
-                    printf("%c ", world[i][j]);
-                    if (j == column - 1) {
-                        printf("\n");
+            default:{
+                if (flag){
+                    drawWorld(world, row, column, unitLength);
+                    flag = 0;
+                }
+                if (specifyEvolve == -1) {
+                    newWorld = NULL;
+                    newWorld = nextGeneration(world);
+                    if (compareWorld(world, newWorld)) {
+                        printf("A total of %d rounds of cell evolution is stabilized.\n", steps);
+                        freeWorld(newWorld);
+                        while (SDL_WaitEvent(&e)) {
+                            switch (e.type) {
+                                case SDL_QUIT:
+                                    closeSDL();
+                                    tag = 0;
+                                    break;
+                                default:
+                                    break;
+                            }
+                        }
+                    }
+                    if (tag == 1){
+                        freeWorld(world);
+                        world = newWorld;
+                        newWorld = NULL;
+                        SDL_Delay(100);
+                        drawWorld(world, row, column, unitLength);
+                    }
+                    steps++;
+                } else {
+                    newWorld = NULL;
+                    newWorld = nextGeneration(world);
+                    if (compareWorld(world, newWorld)) {
+                        printf("A total of %d rounds of cell evolution is stabilized", steps);
+                        freeWorld(newWorld);
+                        while(SDL_WaitEvent(&e)){
+                            switch (e.type) {
+                                case SDL_QUIT:
+                                    closeSDL();
+                                    tag = 0;
+                                    break;
+                                default:
+                                    break;
+                            }
+                        }
+                    }
+                    if (tag == 1){
+                        freeWorld(world);
+                        world = newWorld;
+                        newWorld = NULL;
+                        SDL_Delay(100);
+                        drawWorld(world, row, column, unitLength);
+                    }
+                    steps++;
+                    leftEvolve--;
+                    if (leftEvolve == 0){
+                        printf("按照要求，一共迭代了%d次。", specifyEvolve);
+                        while(SDL_WaitEvent(&e)){
+                            switch (e.type) {
+                                case SDL_QUIT:
+                                    closeSDL();
+                                    break;
+                                default:
+                                    break;
+                            }
+                        }
                     }
                 }
             }
-            steps++;
         }
-    }else{
-        int steps = 0;
-        int leftEvolve = specifyEvolve;
-        while (leftEvolve > 0){
-            char **newWorld = nextGeneration(world);
-            printf("\n");
-            if (compareWorld(world, newWorld) == 1) {
-                printf("A total of %d rounds of cell evolution is stabilized", steps);
-                freeWorld(newWorld);
-                break;
-            }
-            freeWorld(world);
-            world = newWorld;
-            newWorld = NULL;
-            for (int i = 0; i < row; i++) {
-                for (int j = 0; j < column; j++) {
-                    printf("%c ", world[i][j]);
-                    if (j == column - 1) {
-                        printf("\n");
-                    }
-                }
-            }
-            steps++;
-            leftEvolve--;
-        }
-        printf("按照要求，一共迭代了%d次。", specifyEvolve);
     }
-    
-    freeWorld(world);
-    free(evolveNumberString);
-    evolveNumberString = NULL;
+
+freeWorld(world);
+
+free(evolveNumberString);
+evolveNumberString = NULL;
 
 }

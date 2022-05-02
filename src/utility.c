@@ -1,14 +1,15 @@
 #include <string.h>
 #include <stdlib.h>
+#include <stdbool.h>
 #include "../include/utility.h"
 
 // judge whether the string s can be converted to int
 // if can, return 1
 // else, return 0
-int isNumber(char* s){
+bool isNumber(char* s){
     if (strspn(s, "0123456789")==strlen(s)){
-        return 1;
+        return true;
     }else{
-        return 0;
+        return false;
     }
 }
