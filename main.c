@@ -23,22 +23,18 @@ int main(int argc, char **argv) {
             fclose(file);
         }
     }
+
     char **world = readWorld(argv[1], row, column);
-//    for (int i = 0; i < row; i++) {
-//        for (int j = 0; j < column; j++) {
-//            printf("%c ", world[i][j]);
-//            if (j == column - 1) {
-//                printf("\n");
-//            }
-//        }
-//    }
 
     if (init()){
-        game(world);
+        game(argv[1], world);
     }else{
         freeWorld(world);
+        closeSDL();
+        return -1;
     }
 
+    closeSDL();
 
     return 0;
 }

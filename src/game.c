@@ -5,10 +5,12 @@
 #include "../include/game.h"
 #include "../include/utility.h"
 #include "../include/interface.h"
+#include "../include/fileIO.h"
 
 void freeWorld(char **world) {
     for (int i = 0; i < row; i++) {
         free(world[i]);
+        world[i] = NULL;
     }
     free(world);
     world = NULL;
@@ -69,7 +71,7 @@ char **nextGeneration(char **world) {
     return newWorld;
 }
 
-void game(char **world) {
+void game(char* fileName, char **world) {
     /*
      * 打印world测试二维数组正确传入函数
     for (int i = 0; i < row; i++) {
@@ -235,7 +237,7 @@ void game(char **world) {
                     freeWorld(world);
                     world = newWorld;
                     newWorld = NULL;
-                    SDL_Delay(600);
+                    SDL_Delay(300);
                     drawWorld(world, row, column, unitLength);
                 }
                 steps++;
@@ -275,7 +277,7 @@ void game(char **world) {
                     freeWorld(world);
                     world = newWorld;
                     newWorld = NULL;
-                    SDL_Delay(600);
+                    SDL_Delay(300);
                     drawWorld(world, row, column, unitLength);
                 }
                 steps++;
@@ -284,8 +286,7 @@ void game(char **world) {
         }
     }
 
-
-
+    storeWorld(fileName, world, row, column);
     freeWorld(world);
 
     free(evolveNumberString);

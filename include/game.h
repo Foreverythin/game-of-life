@@ -9,7 +9,7 @@ void freeWorld(char** world);
 //if 2 worlds are exactly same, return 1; otherwise 0.
 bool compareWorld(char** world, char** newWorld);
 
-void game(char** world);
+void game(char* fileName, char** world);
 
 char** nextGeneration(char** world);
 #endif //GAME_OF_LIFE_GAME_H

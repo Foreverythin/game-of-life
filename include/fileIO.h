@@ -3,4 +3,6 @@
 
 char **readWorld(char *fileName, int row, int column);
 
+void storeWorld(char* fileName, char** world, int row, int column);
+
 #endif //GAME_OF_LIFE_FILEIO_H
