@@ -148,11 +148,6 @@
     </key>
   </component>
   <component name="RunManager" selected="Makefile Application.all">
-    <configuration default="true" type="CLionExternalRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" PASS_PARENT_ENVS_2="true">
-      <method v="2">
-        <option name="CLION.EXTERNAL.BUILD" enabled="true" />
-      </method>
-    </configuration>
     <configuration name="all" type="CLionNativeAppRunConfigurationType" PROGRAM_PARAMS="game1.txt" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="game-of-life" TARGET_NAME="all" CONFIG_NAME="all" version="1" RUN_PATH="$PROJECT_DIR$/bin/GameOfLife">
       <method v="2">
         <option name="CLION.COMPOUND.BUILD" enabled="true" />
@@ -198,7 +193,10 @@
       <workItem from="1651379779155" duration="12122000" />
       <workItem from="1651392255375" duration="4588000" />
       <workItem from="1651400663925" duration="77000" />
-      <workItem from="1651466585670" duration="25226000" />
+      <workItem from="1651466585670" duration="25273000" />
+      <workItem from="1651492606195" duration="652000" />
+      <workItem from="1651496925456" duration="4980000" />
+      <workItem from="1651549687400" duration="805000" />
     </task>
     <servers />
   </component>

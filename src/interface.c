@@ -46,7 +46,7 @@ void drawWorld(char** world, int row, int column, float unitLength){
                 SDL_SetRenderDrawColor(renderer, 255, 255, 255, 255);
                 SDL_RenderFillRect(renderer, &rect);
             }
-            SDL_SetRenderDrawColor(renderer, 0, 255, 255, 255);
+            SDL_SetRenderDrawColor(renderer, 255, 255, 255, 255);
             SDL_RenderDrawRect(renderer, &rect);
         }
     }
