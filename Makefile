@@ -24,7 +24,7 @@ OBJ= $(SRC:.c=.o)
 # build executable
 
 $(EXE): $(OBJ)
-	$(CC) $(OBJ) -o $(EXE) -F/Library/Frameworks -framework SDL2_image -framework SDL2 -arch x86_64
+	$(CC) $(OBJ) -o $(EXE) -F/Library/Frameworks -framework SDL2_image -framework SDL2_ttf -framework SDL2 -arch x86_64
 
 all: $(EXE)
 .PHONY: all

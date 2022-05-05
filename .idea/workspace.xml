@@ -153,6 +153,11 @@
         <option name="CLION.COMPOUND.BUILD" enabled="true" />
       </method>
     </configuration>
+    <configuration default="true" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" PASS_PARENT_ENVS_2="true">
+      <method v="2">
+        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="all" type="MAKEFILE_TARGET_RUN_CONFIGURATION" factoryName="Makefile" temporary="true">
       <makefile filename="$PROJECT_DIR$/Makefile" target="all" workingDirectory="" arguments="">
         <envs />
@@ -197,7 +202,9 @@
       <workItem from="1651492606195" duration="652000" />
       <workItem from="1651496925456" duration="4980000" />
       <workItem from="1651549687400" duration="1043000" />
-      <workItem from="1651654573395" duration="2968000" />
+      <workItem from="1651654573395" duration="5254000" />
+      <workItem from="1651715055994" duration="5104000" />
+      <workItem from="1651721056755" duration="187000" />
     </task>
     <servers />
   </component>
