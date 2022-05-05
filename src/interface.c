@@ -1,13 +1,12 @@
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_image.h>
-#include <SDL2/SDL_ttf.h>
 #include <stdbool.h>
 #include "../include/interface.h"
 
 SDL_Window *window = NULL;
 SDL_Renderer *renderer = NULL;
 SDL_Texture *texture = NULL;
-TTF_Font *font = NULL;
+
 
 bool init() {
     int success = true;
@@ -20,7 +19,7 @@ bool init() {
     window = SDL_CreateWindow("Game of Life",
                               SDL_WINDOWPOS_CENTERED,
                               SDL_WINDOWPOS_CENTERED,
-                              800, 640,
+                              640, 640,
                               SDL_WINDOW_SHOWN);
     if (window == NULL) {
         printf("Window could not be created! SDL Error: %s\n", SDL_GetError());
@@ -43,21 +42,8 @@ bool init() {
                     printf("Texture could not initialize! SDL Error: %s\n", SDL_GetError());
                     success = false;
                 } else {
-                    if (TTF_Init() == -1) {
-                        printf("TTF could not initialize! TTF Error: %s\n", TTF_GetError());
-                        success = false;
-                    } else {
-                        font = TTF_OpenFont("../font/Drive Book.ttf", 32);
-                        if (!font){
-                            printf("Font open error: %s", TTF_GetError());
-                            success = false;
-                        }else{
-                            SDL_RenderCopy(renderer, texture, NULL, NULL);
-                            SDL_RenderPresent(renderer);
-                        }
-
-                    }
-
+                    SDL_RenderCopy(renderer, texture, NULL, NULL);
+                    SDL_RenderPresent(renderer);
                 }
             }
         }
@@ -97,7 +83,7 @@ void drawWorld(char **world, int row, int column, float unitLength) {
             SDL_RenderDrawRect(renderer, &rect);
         }
     }
-    drawButton(world);
+//    drawButton(world);
     SDL_RenderPresent(renderer);
 }
 
@@ -116,56 +102,49 @@ void closeSDL() {
     SDL_Quit();
 }
 
-void drawButton(char **world) {
-    SDL_Button button_begin;
-    SDL_Button button_pause;
-    SDL_Button button_continue;
-    SDL_Button button_nextStep;
-    SDL_Button button_speedUp;
-    SDL_Button button_slowDown;
-
-    strcpy(button_begin.text, "BEGIN");
-    button_begin.x = 675;
-    button_begin.y = 50;
-    button_begin.w = 90;
-    button_begin.h = 35;
-
-    memcpy(&button_pause, &button_begin, 36);
-    button_pause.y += 100;
-    memcpy(&button_continue, &button_begin, 36);
-    button_continue.y += 200;
-    memcpy(&button_nextStep, &button_begin, 36);
-    button_nextStep.y += 300;
-    memcpy(&button_speedUp, &button_begin, 36);
-    button_speedUp.y += 400;
-    memcpy(&button_slowDown, &button_begin, 36);
-    button_slowDown.y += 500;
-
-    SDL_Rect rect = {button_begin.x, button_begin.y, button_begin.w, button_begin.h};
-    SDL_Rect rect2 = {button_pause.x, button_pause.y, button_pause.w, button_pause.h};
-    SDL_Rect rect3 = {button_continue.x, button_continue.y, button_continue.w, button_continue.h};
-    SDL_Rect rect4 = {button_nextStep.x, button_nextStep.y, button_nextStep.w, button_nextStep.h};
-    SDL_Rect rect5 = {button_speedUp.x, button_speedUp.y, button_speedUp.w, button_speedUp.h};
-    SDL_Rect rect6 = {button_slowDown.x, button_slowDown.y, button_slowDown.w, button_slowDown.h};
-    SDL_SetRenderDrawColor(renderer, 211, 211, 211, 255);
-    SDL_RenderFillRect(renderer, &rect);
-    SDL_RenderFillRect(renderer, &rect2);
-    SDL_RenderFillRect(renderer, &rect3);
-    SDL_RenderFillRect(renderer, &rect4);
-    SDL_RenderFillRect(renderer, &rect5);
-    SDL_RenderFillRect(renderer, &rect6);
-    SDL_SetRenderDrawColor(renderer, 255, 255, 255, 255);
-    SDL_RenderDrawRect(renderer, &rect);
-    SDL_RenderDrawRect(renderer, &rect2);
-    SDL_RenderDrawRect(renderer, &rect3);
-    SDL_RenderDrawRect(renderer, &rect4);
-    SDL_RenderDrawRect(renderer, &rect5);
-    SDL_RenderDrawRect(renderer, &rect6);
-
-//    char text1[10] = "START";
-//    SDL_Color fontColor = {0, 0, 0};
-//    SDL_Surface *textSurface;
-//    textSurface = TTF_RenderUTF8_Solid(font, text1, fontColor);
-//    SDL_Texture *textTexture = SDL_CreateTextureFromSurface(renderer, textTexture);
-
-}
+//void drawButton(char **world) {
+//    SDL_Button button_begin;
+//    SDL_Button button_pause;
+//    SDL_Button button_continue;
+//    SDL_Button button_nextStep;
+//    SDL_Button button_speedUp;
+//    SDL_Button button_slowDown;
+//
+//    strcpy(button_begin.text, "BEGIN");
+//    button_begin.x = 675;
+//    button_begin.y = 50;
+//    button_begin.w = 90;
+//    button_begin.h = 35;
+//
+//    memcpy(&button_pause, &button_begin, 36);
+//    button_pause.y += 100;
+//    memcpy(&button_continue, &button_begin, 36);
+//    button_continue.y += 200;
+//    memcpy(&button_nextStep, &button_begin, 36);
+//    button_nextStep.y += 300;
+//    memcpy(&button_speedUp, &button_begin, 36);
+//    button_speedUp.y += 400;
+//    memcpy(&button_slowDown, &button_begin, 36);
+//    button_slowDown.y += 500;
+//
+//    SDL_Rect rect = {button_begin.x, button_begin.y, button_begin.w, button_begin.h};
+//    SDL_Rect rect2 = {button_pause.x, button_pause.y, button_pause.w, button_pause.h};
+//    SDL_Rect rect3 = {button_continue.x, button_continue.y, button_continue.w, button_continue.h};
+//    SDL_Rect rect4 = {button_nextStep.x, button_nextStep.y, button_nextStep.w, button_nextStep.h};
+//    SDL_Rect rect5 = {button_speedUp.x, button_speedUp.y, button_speedUp.w, button_speedUp.h};
+//    SDL_Rect rect6 = {button_slowDown.x, button_slowDown.y, button_slowDown.w, button_slowDown.h};
+//    SDL_SetRenderDrawColor(renderer, 211, 211, 211, 255);
+//    SDL_RenderFillRect(renderer, &rect);
+//    SDL_RenderFillRect(renderer, &rect2);
+//    SDL_RenderFillRect(renderer, &rect3);
+//    SDL_RenderFillRect(renderer, &rect4);
+//    SDL_RenderFillRect(renderer, &rect5);
+//    SDL_RenderFillRect(renderer, &rect6);
+//    SDL_SetRenderDrawColor(renderer, 255, 255, 255, 255);
+//    SDL_RenderDrawRect(renderer, &rect);
+//    SDL_RenderDrawRect(renderer, &rect2);
+//    SDL_RenderDrawRect(renderer, &rect3);
+//    SDL_RenderDrawRect(renderer, &rect4);
+//    SDL_RenderDrawRect(renderer, &rect5);
+//    SDL_RenderDrawRect(renderer, &rect6);
+//}

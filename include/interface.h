@@ -18,7 +18,7 @@ SDL_Texture *loadTexture(char* path);
 extern SDL_Window *window;
 extern SDL_Renderer *renderer;
 
-void drawButton(char** world);
+//void drawButton(char** world);
 
 void drawWorld(char** world, int row, int column, float unitLength);
 

@@ -88,20 +88,25 @@ void game(char *fileName, char **world) {
     }
 
 
-    SDL_Event initEvent;
-    bool quit = false;
-    while (!quit) {
-        if (SDL_PollEvent(&initEvent)) {
-            switch (initEvent.type) {
-                case SDL_QUIT:
-                    quit = true;
-            }
-        } else {
-            drawWorld(world, row, column, unitLength);
-        }
-    }
+//    SDL_Event initEvent;
+//    bool quit = false;
+//    while (!quit) {
+//        if (SDL_PollEvent(&initEvent)) {
+//            switch (initEvent.type) {
+//                case SDL_QUIT:
+//                    closeSDL();
+//                case SDL_KEYDOWN:
+//                    switch (initEvent.key.keysym.sym) {
+//                        case SDLK_SPACE:
+//                            quit = true;
+//                    }
+//            }
+//        } else {
+//            drawWorld(world, row, column, unitLength);
+//        }
+//    }
 
-    quit = false;
+    bool quit = false;
 
     SDL_Event e;
     int steps = 0;
@@ -109,80 +114,111 @@ void game(char *fileName, char **world) {
     char **newWorld = NULL;
     int flag = 1;
     int tag = 1;
+    int delayDuration = 200;
+    bool pause = true;
     while (!quit) {
         if (SDL_PollEvent(&e)) {
             switch (e.type) {
                 case SDL_QUIT:
                     quit = true;
+                    break;
+                case SDL_KEYDOWN:
+                    switch (e.key.keysym.sym) {
+                        case SDLK_SPACE:
+                            if (pause == true){
+                                pause = false;
+                            }else{
+                                pause = true;
+                            }
+                        case SDLK_UP:
+                            if (delayDuration>=200 && delayDuration<=800){
+                                delayDuration -= 100;
+                                printf("Current delay duration: %d\n", delayDuration);
+                            }
+                            break;
+                        case SDLK_DOWN:
+                            if (delayDuration>=100 && delayDuration<=700){
+                                delayDuration += 100;
+                                printf("Current delay duration: %d\n", delayDuration);
+                            }
+                            break;
+                    }
+                    break;
                 default:
+                    if (flag == 1){
+                        drawWorld(world, row, column, unitLength);
+                        flag = 0;
+                    }
                     break;
             }
         } else {
-            if (specifyEvolve == -1) {
-                newWorld = nextGeneration(world);
-                if (compareWorld(world, newWorld)) {
-                    printf("A total of %d rounds of cell evolution is stabilized.\n", steps);
-                    freeWorld(newWorld);
-                    while (SDL_WaitEvent(&e)) {
-                        switch (e.type) {
-                            case SDL_QUIT:
-                                closeSDL();
-                                tag = 0;
-                                quit = true;
-                                break;
-                            default:
-                                break;
+            if (!pause) {
+                if (specifyEvolve == -1) {
+                    newWorld = nextGeneration(world);
+                    if (compareWorld(world, newWorld)) {
+                        printf("A total of %d rounds of cell evolution is stabilized.\n", steps);
+                        freeWorld(newWorld);
+                        while (SDL_WaitEvent(&e)) {
+                            switch (e.type) {
+                                case SDL_QUIT:
+                                    closeSDL();
+                                    tag = 0;
+                                    quit = true;
+                                    break;
+                                default:
+                                    break;
+                            }
                         }
                     }
-                }
-                if (tag == 1) {
-                    freeWorld(world);
-                    world = newWorld;
-                    newWorld = NULL;
-                    SDL_Delay(300);
-                    drawWorld(world, row, column, unitLength);
-                }
-                steps++;
-            } else {
-                newWorld = nextGeneration(world);
-                if (compareWorld(world, newWorld)) {
-                    printf("A total of %d rounds of cell evolution is stabilized.\n", steps);
-                    freeWorld(newWorld);
-                    while (SDL_WaitEvent(&e)) {
-                        switch (e.type) {
-                            case SDL_QUIT:
-                                closeSDL();
-                                tag = 0;
-                                quit = true;
-                                break;
-                            default:
-                                break;
+                    if (tag == 1) {
+                        freeWorld(world);
+                        world = newWorld;
+                        newWorld = NULL;
+                        SDL_Delay(delayDuration);
+                        drawWorld(world, row, column, unitLength);
+                    }
+                    steps++;
+                } else {
+                    newWorld = nextGeneration(world);
+                    if (compareWorld(world, newWorld)) {
+                        printf("A total of %d rounds of cell evolution is stabilized.\n", steps);
+                        freeWorld(newWorld);
+                        while (SDL_WaitEvent(&e)) {
+                            switch (e.type) {
+                                case SDL_QUIT:
+                                    closeSDL();
+                                    tag = 0;
+                                    quit = true;
+                                    break;
+                                default:
+                                    break;
+                            }
+                        }
+                    } else if (leftEvolve == 0) {
+                        printf("按照要求，一共迭代了%d次。\n", specifyEvolve);
+                        freeWorld(newWorld);
+                        while (SDL_WaitEvent(&e)) {
+                            switch (e.type) {
+                                case SDL_QUIT:
+                                    closeSDL();
+                                    tag = 0;
+                                    quit = true;
+                                    break;
+                                default:
+                                    break;
+                            }
                         }
                     }
-                } else if (leftEvolve == 0) {
-                    printf("按照要求，一共迭代了%d次。\n", specifyEvolve);
-                    freeWorld(newWorld);
-                    while (SDL_WaitEvent(&e)) {
-                        switch (e.type) {
-                            case SDL_QUIT:
-                                closeSDL();
-                                tag = 0;
-                                quit = true;
-                                break;
-                            default:
-                                break;
-                        }
+                    if (tag == 1) {
+                        freeWorld(world);
+                        world = newWorld;
+                        newWorld = NULL;
+                        SDL_Delay(delayDuration);
+                        drawWorld(world, row, column, unitLength);
                     }
+                    steps++;
+                    leftEvolve--;
                 }
-                if (tag == 1) {
-                    freeWorld(world);
-                    world = newWorld;
-                    newWorld = NULL;
-                    SDL_Delay(300);
-                    drawWorld(world, row, column, unitLength);
-                }
-                steps++;
-                leftEvolve--;
             }
         }
     }
