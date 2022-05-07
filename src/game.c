@@ -7,6 +7,16 @@
 #include "../include/interface.h"
 #include "../include/fileIO.h"
 
+/**
+ * free the space which was allocated in heap and was pointed by world and *world
+ *
+ * For example:
+ * freeWorld(world)
+ * returns nothing
+ *
+ * @param world is a 2-dimensional array which stores the live states of cells.
+ * @return nothing
+ */
 void freeWorld(char **world) {
     for (int i = 0; i < row; i++) {
         free(world[i]);
@@ -16,6 +26,18 @@ void freeWorld(char **world) {
     world = NULL;
 }
 
+/**
+ * compare two 2-dimensional arrays to judge whether they are store the same live states of cells
+ *
+ * For example:
+ * compareWorld(world, newWorld)
+ * returns true
+ *
+ * @param world is one 2-dimensional array which stores the same live states of cells
+ * @param newWorld is one 2-dimensional array which is the next generation of "world"
+ * @return true if "world" and "newWorld" store the same live states of cells
+ *         otherwise false
+ */
 bool compareWorld(char **world, char **newWorld) {
     int numEqual = 0;
     for (int i = 0; i < row; i++) {
@@ -32,6 +54,16 @@ bool compareWorld(char **world, char **newWorld) {
     }
 }
 
+/**
+ * generate the next generation of cells
+ *
+ * For example:
+ * nextGeneration(world)
+ * returns newWorld
+ *
+ * @param world a 2-dimensional array which stores the previous live states of cells.
+ * @return a 2-dimensional array which stores the live states of the next generation's cells
+ */
 char **nextGeneration(char **world) {
     char **newWorld = (char **) malloc(sizeof(char *) * row);
     for (int i = 0; i < row; i++) {
@@ -71,6 +103,19 @@ char **nextGeneration(char **world) {
     return newWorld;
 }
 
+/**
+ * Run the game using SDL2 to show the graphical interface
+ * Users can specify the steps of iterations by entering a number, or do not specify the steps by entering a letter "q"
+ * Users can enter the key "SPACE" to begin or pause the game, and the key "UP"/"DOWN" to speed up/slow down the game
+ *
+ * For example:
+ * game("game1.txt", world)
+ * returns nothing
+ *
+ * @param fileName the name of the file which is the second parameter in the terminal.
+ * @param world a 2-dimensional array which stores the live states of cells.
+ * @return nothing
+ */
 void game(char *fileName, char **world) {
 
     char *evolveNumberString = (char *) malloc(sizeof(char) * 120);
@@ -86,25 +131,6 @@ void game(char *fileName, char **world) {
     } else {
         specifyEvolve = atoi(evolveNumberString);
     }
-
-
-//    SDL_Event initEvent;
-//    bool quit = false;
-//    while (!quit) {
-//        if (SDL_PollEvent(&initEvent)) {
-//            switch (initEvent.type) {
-//                case SDL_QUIT:
-//                    closeSDL();
-//                case SDL_KEYDOWN:
-//                    switch (initEvent.key.keysym.sym) {
-//                        case SDLK_SPACE:
-//                            quit = true;
-//                    }
-//            }
-//        } else {
-//            drawWorld(world, row, column, unitLength);
-//        }
-//    }
 
     bool quit = false;
 

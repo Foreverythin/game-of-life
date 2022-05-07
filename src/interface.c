@@ -3,11 +3,18 @@
 #include <stdbool.h>
 #include "../include/interface.h"
 
-SDL_Window *window = NULL;
-SDL_Renderer *renderer = NULL;
-SDL_Texture *texture = NULL;
 
+SDL_Window *window = NULL; // initialize the SDL_Window pointer which points to NULL
+SDL_Renderer *renderer = NULL; // initialize the SDL_Renderer pointer which points to NULL
+SDL_Texture *texture = NULL; // initialize the SDL_Texture pointer which points to NULL
 
+/**
+ * initialize the window, the renderer and the texture
+ * the size of the window is fixed at (640*640) pixels
+ *
+ * @return true if the window, the renderer and the texture are initalized with no error
+ *         otherwise false
+ */
 bool init() {
     int success = true;
     //Initialize SDL
@@ -52,6 +59,17 @@ bool init() {
     return success;
 }
 
+/**
+ * load the image to surface
+ * generate the texture from the surface
+ *
+ * For example:
+ * loadTexture("photo/background.png")
+ * returns gTexture
+ *
+ * @param path is the relative path of the image
+ * @return a pointer which points to SDL_Texture
+ */
 SDL_Texture *loadTexture(char *path) {
     SDL_Texture *gTexture = NULL;
     SDL_Surface *surface = IMG_Load(path);
@@ -68,6 +86,15 @@ SDL_Texture *loadTexture(char *path) {
     return gTexture;
 }
 
+/**
+ * draw white squares to express live cells and black squares to express dead cells
+ *
+ * @param world a 2-dimensional array which stores the previous live states of cells.
+ * @param row the number of rows in the world which is in the interval of [0, 65535]
+ * @param column the number of columns in the world which is in the interval of [0, 65535]
+ * @param unitLength the width of each small cell square, computed by 640.0/max(row, column)
+ * @return nothing
+ */
 void drawWorld(char **world, unsigned int row, unsigned int column, float unitLength) {
 //    SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
 //    SDL_RenderClear(renderer);
@@ -83,10 +110,12 @@ void drawWorld(char **world, unsigned int row, unsigned int column, float unitLe
             SDL_RenderDrawRect(renderer, &rect);
         }
     }
-//    drawButton(world);
     SDL_RenderPresent(renderer);
 }
 
+/**
+ * free the resources of SDL, texture, renderer and window
+ */
 void closeSDL() {
     SDL_DestroyTexture(texture);
     texture = NULL;
@@ -101,50 +130,3 @@ void closeSDL() {
     IMG_Quit();
     SDL_Quit();
 }
-
-//void drawButton(char **world) {
-//    SDL_Button button_begin;
-//    SDL_Button button_pause;
-//    SDL_Button button_continue;
-//    SDL_Button button_nextStep;
-//    SDL_Button button_speedUp;
-//    SDL_Button button_slowDown;
-//
-//    strcpy(button_begin.text, "BEGIN");
-//    button_begin.x = 675;
-//    button_begin.y = 50;
-//    button_begin.w = 90;
-//    button_begin.h = 35;
-//
-//    memcpy(&button_pause, &button_begin, 36);
-//    button_pause.y += 100;
-//    memcpy(&button_continue, &button_begin, 36);
-//    button_continue.y += 200;
-//    memcpy(&button_nextStep, &button_begin, 36);
-//    button_nextStep.y += 300;
-//    memcpy(&button_speedUp, &button_begin, 36);
-//    button_speedUp.y += 400;
-//    memcpy(&button_slowDown, &button_begin, 36);
-//    button_slowDown.y += 500;
-//
-//    SDL_Rect rect = {button_begin.x, button_begin.y, button_begin.w, button_begin.h};
-//    SDL_Rect rect2 = {button_pause.x, button_pause.y, button_pause.w, button_pause.h};
-//    SDL_Rect rect3 = {button_continue.x, button_continue.y, button_continue.w, button_continue.h};
-//    SDL_Rect rect4 = {button_nextStep.x, button_nextStep.y, button_nextStep.w, button_nextStep.h};
-//    SDL_Rect rect5 = {button_speedUp.x, button_speedUp.y, button_speedUp.w, button_speedUp.h};
-//    SDL_Rect rect6 = {button_slowDown.x, button_slowDown.y, button_slowDown.w, button_slowDown.h};
-//    SDL_SetRenderDrawColor(renderer, 211, 211, 211, 255);
-//    SDL_RenderFillRect(renderer, &rect);
-//    SDL_RenderFillRect(renderer, &rect2);
-//    SDL_RenderFillRect(renderer, &rect3);
-//    SDL_RenderFillRect(renderer, &rect4);
-//    SDL_RenderFillRect(renderer, &rect5);
-//    SDL_RenderFillRect(renderer, &rect6);
-//    SDL_SetRenderDrawColor(renderer, 255, 255, 255, 255);
-//    SDL_RenderDrawRect(renderer, &rect);
-//    SDL_RenderDrawRect(renderer, &rect2);
-//    SDL_RenderDrawRect(renderer, &rect3);
-//    SDL_RenderDrawRect(renderer, &rect4);
-//    SDL_RenderDrawRect(renderer, &rect5);
-//    SDL_RenderDrawRect(renderer, &rect6);
-//}

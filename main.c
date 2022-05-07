@@ -3,13 +3,23 @@
 #include "include/game.h"
 #include "include/interface.h"
 
-
-unsigned int row, column; // row is the number of rows in the world which is in [0, 65535],
-                          // and column is the number of columns in the world which is also in [0, 65535]
-float unitLength; // unitLength is the width of each small cell square, computed by 640.0/max(row, column)
+/**
+ * row is the number of rows in the world which is in the interval of [0, 65535]
+ * column is the number of columns in the world which is also in the interval of [0, 65535]
+ */
+unsigned int row, column;
 
 /**
- * The entrance function of this game-"game of life"
+ * unitLength is the width of each small cell square, computed by 640.0/max(row, column)
+ */
+float unitLength;
+
+/**
+ * The entrance function of this game - "game of life"
+ *
+ * To run this game, for example:
+ * "./GameOfLife game1.txt"
+ * returns 0
  *
  * @param argc the number of parameters users entered in the terminal
  *      the value of argc must be 2. Otherwise the program will report error and finish.
