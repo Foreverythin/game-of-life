@@ -169,6 +169,9 @@ void game(char *fileName, char **world) {
                                 printf("Current delay duration: %d\n", delayDuration);
                             }
                             break;
+                        case SDLK_ESCAPE:
+                            quit = true;
+                            break;
                     }
                     break;
                 default:
@@ -192,6 +195,14 @@ void game(char *fileName, char **world) {
                                     tag = 0;
                                     quit = true;
                                     break;
+                                case SDL_KEYDOWN:
+                                    switch (e.key.keysym.sym) {
+                                        case SDLK_ESCAPE:
+                                            closeSDL();
+                                            tag = 0;
+                                            quit = true;
+                                            break;
+                                    }
                                 default:
                                     break;
                             }
@@ -217,6 +228,14 @@ void game(char *fileName, char **world) {
                                     tag = 0;
                                     quit = true;
                                     break;
+                                case SDL_KEYDOWN:
+                                    switch (e.key.keysym.sym) {
+                                        case SDLK_ESCAPE:
+                                            closeSDL();
+                                            tag = 0;
+                                            quit = true;
+                                            break;
+                                    }
                                 default:
                                     break;
                             }
@@ -231,6 +250,14 @@ void game(char *fileName, char **world) {
                                     tag = 0;
                                     quit = true;
                                     break;
+                                case SDL_KEYDOWN:
+                                    switch (e.key.keysym.sym) {
+                                        case SDLK_ESCAPE:
+                                            closeSDL();
+                                            tag = 0;
+                                            quit = true;
+                                            break;
+                                    }
                                 default:
                                     break;
                             }
