@@ -20,7 +20,7 @@ extern SDL_Renderer *renderer;
 
 //void drawButton(char** world);
 
-void drawWorld(char** world, int row, int column, float unitLength);
+void drawWorld(char** world, unsigned int row, unsigned int column, float unitLength);
 
 void closeSDL();
 

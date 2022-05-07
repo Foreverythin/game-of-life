@@ -130,6 +130,7 @@ void game(char *fileName, char **world) {
                             }else{
                                 pause = true;
                             }
+                            break;
                         case SDLK_UP:
                             if (delayDuration>=200 && delayDuration<=800){
                                 delayDuration -= 100;

@@ -68,7 +68,7 @@ SDL_Texture *loadTexture(char *path) {
     return gTexture;
 }
 
-void drawWorld(char **world, int row, int column, float unitLength) {
+void drawWorld(char **world, unsigned int row, unsigned int column, float unitLength) {
 //    SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
 //    SDL_RenderClear(renderer);
     SDL_RenderCopy(renderer, texture, NULL, NULL);

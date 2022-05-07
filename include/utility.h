@@ -2,6 +2,6 @@
 #define GAME_OF_LIFE_UTILITY_H
 bool isNumber(char* s);
 
-extern int row, column;
+extern unsigned int row, column;
 
 #endif //GAME_OF_LIFE_UTILITY_H

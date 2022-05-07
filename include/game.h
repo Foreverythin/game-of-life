@@ -1,7 +1,7 @@
 #ifndef GAME_OF_LIFE_GAME_H
 #define GAME_OF_LIFE_GAME_H
 #include <stdbool.h>
-extern int row, column;
+extern unsigned int row, column;
 extern float unitLength;
 
 void freeWorld(char** world);

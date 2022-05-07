@@ -3,13 +3,13 @@
 #include <string.h>
 #include "../include/fileIO.h"
 
-char **readWorld(char *fileName, int row, int column) {
+char **readWorld(char *fileName, unsigned int row, unsigned int column) {
     char **world = (char **) malloc(sizeof(char *) * row);
     for (int i = 0; i < row; i++) {
         world[i] = (char *) malloc(sizeof(char) * column);
     }
     FILE *file = fopen(fileName, "r");
-    fscanf(file, "%d %d\n", &row, &column);
+    fscanf(file, "%u %u\n", &row, &column);
     for (int i = 0; i < row; i++) {
         for (int j = 0; j < column; j++) {
             world[i][j] = fgetc(file);
@@ -20,7 +20,7 @@ char **readWorld(char *fileName, int row, int column) {
     return world;
 }
 
-void storeWorld(char *fileName, char **world, int row, int column) {
+void storeWorld(char *fileName, char **world, unsigned int row, unsigned int column) {
     char src[50], dest[50];
 
     strcpy(dest, "output_");
@@ -31,7 +31,7 @@ void storeWorld(char *fileName, char **world, int row, int column) {
     if (!file) {
         printf("Wrong to store last generation's information to the file!\n");
     } else {
-        fprintf(file, "%d %d\n", row, column);
+        fprintf(file, "%u %u\n", row, column);
         for (int i = 0; i < row; i++) {
             for (int j = 0; j < column; j++) {
                 fputc(world[i][j], file);
