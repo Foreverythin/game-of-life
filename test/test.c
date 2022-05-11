@@ -1,8 +1,6 @@
 #include <CUnit/CUnit.h>
 #include <CUnit/Basic.h>
-#include <stdio.h>
 #include <stdlib.h>
-#include <stdbool.h>
 #include "../include/fileIO.h"
 #include "../include/game.h"
 #include "../include/interface.h"
@@ -84,6 +82,52 @@ void test_compareWorld() {
     newWorld = NULL;
 }
 
+// test the function of compareWorld in game.h
+void test_nextGeneration(){
+    // two new 2-dimensional arrays
+    char **world = (char **) malloc(sizeof(char *) * 3);
+    for (int i = 0; i < 3; i++) {
+        world[i] = (char *) malloc(sizeof(char) * 3);
+    }
+    char **newWorld = (char **) malloc(sizeof(char *) * 3);
+    for (int i = 0; i < 3; i++) {
+        newWorld[i] = (char *) malloc(sizeof(char) * 3);
+    }
+    for (int i = 0; i < 3; i++) {
+        for (int j = 0; j < 3; j++) {
+            world[i][j] = '1';
+            newWorld[i][j] = '1';
+        }
+    }
+    CU_ASSERT_EQUAL(nextGeneration(NULL), NULL);
+    CU_ASSERT_NOT_EQUAL(nextGeneration(world), newWorld);
+
+    // free the pointers
+    for (int i = 0; i < 3; i++) {
+        free(world[i]);
+        world[i] = NULL;
+        free(newWorld[i]);
+        newWorld[i] = NULL;
+    }
+    free(world);
+    world = NULL;
+    free(newWorld);
+    newWorld = NULL;
+}
+
+//test the function of isNumber
+void test_isNumber(){
+    CU_ASSERT_TRUE(isNumber("1124"));
+    CU_ASSERT_TRUE(isNumber("0"));
+    CU_ASSERT_FALSE(isNumber("-1"));
+    CU_ASSERT_FALSE(isNumber("a"));
+    CU_ASSERT_FALSE(isNumber("apple123"));
+    CU_ASSERT_FALSE(isNumber("123apple"));
+    CU_ASSERT_FALSE(isNumber(""));
+    CU_ASSERT_FALSE(isNumber(NULL));
+
+}
+
 int main(void) {
     /* initialize the CUnit test registry */
     if (CUE_SUCCESS != CU_initialize_registry()) {
@@ -98,6 +142,9 @@ int main(void) {
     if (NULL == CU_add_test(pSuite, "test readWorld()", test_readWorld)) goto cleanup;
     if (NULL == CU_add_test(pSuite, "test storeWorld()", test_storeWorld)) goto cleanup;
     if (NULL == CU_add_test(pSuite, "test compareWorld()", test_compareWorld)) goto cleanup;
+    if (NULL == CU_add_test(pSuite, "test nextGeneration()", test_nextGeneration)) goto cleanup;
+    if (NULL == CU_add_test(pSuite, "test isNumber()", test_isNumber)) goto cleanup;
+
 
     CU_basic_set_mode(CU_BRM_VERBOSE);
 

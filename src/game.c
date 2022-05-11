@@ -74,9 +74,16 @@ bool compareWorld(char **world, char **newWorld, unsigned int row, unsigned int 
  * returns newWorld
  *
  * @param world a 2-dimensional array which stores the previous live states of cells.
- * @return a 2-dimensional array which stores the live states of the next generation's cells
+ * @return a 2-dimensional array which stores the live states of the next generation's cells;
+ *         NULL if world points to NULL or *world points to NULL
  */
 char **nextGeneration(char **world) {
+    if (world == NULL){
+        return NULL;
+    }
+    if (*world == NULL){
+        return NULL;
+    }
     char **newWorld = (char **) malloc(sizeof(char *) * row);
     for (int i = 0; i < row; i++) {
         newWorld[i] = (char *) malloc(sizeof(char) * column);

@@ -17,6 +17,9 @@
  *         otherwise false
  */
 bool isNumber(char* s){
+    if (s == NULL || s == ""){
+        return false;
+    }
     if (strspn(s, "0123456789")==strlen(s)){
         return true;
     }else{

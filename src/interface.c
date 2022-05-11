@@ -44,7 +44,7 @@ bool init() {
                 printf("SDL_image could not initialize! SDL_image Error: %s\n", IMG_GetError());
                 success = false;
             } else {
-                texture = loadTexture("../photo/background.png");
+                texture = loadTexture("../photo/background.png", renderer);
                 if (texture == NULL) {
                     printf("Texture could not initialize! SDL Error: %s\n", SDL_GetError());
                     success = false;
@@ -68,18 +68,21 @@ bool init() {
  * returns gTexture
  *
  * @param path is the relative path of the image
- * @return a pointer which points to SDL_Texture
+ * @return a pointer which points to SDL_Texture;
+ *         NULL if the image not found or texture not build successfully
  */
-SDL_Texture *loadTexture(char *path) {
+SDL_Texture *loadTexture(char *path, SDL_Renderer *renderer) {
     SDL_Texture *gTexture = NULL;
     SDL_Surface *surface = IMG_Load(path);
     if (surface == NULL) {
         printf("No such file: %s! Error: %s\n", path, IMG_GetError());
+        return NULL;
     } else {
         //Create texture from surface pixels
         gTexture = SDL_CreateTextureFromSurface(renderer, surface);
         if (gTexture == NULL) {
             printf("Wrong to create texture! SDL Error: %s\n", SDL_GetError());
+            return NULL;
         }
     }
 
