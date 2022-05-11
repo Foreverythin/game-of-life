@@ -1,7 +1,7 @@
 #ifndef GAME_OF_LIFE_INTERFACE_H
 #define GAME_OF_LIFE_INTERFACE_H
 
-#include <SDL2/SDL.h>
+#include "SDL2/SDL.h"
 #include <stdbool.h>
 
 typedef struct st_SDL_Button

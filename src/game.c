@@ -24,6 +24,8 @@ void freeWorld(char **world) {
     }
     free(world);
     world = NULL;
+
+
 }
 
 /**
@@ -37,8 +39,18 @@ void freeWorld(char **world) {
  * @param newWorld is one 2-dimensional array which is the next generation of "world"
  * @return true if "world" and "newWorld" store the same live states of cells
  *         otherwise false
+ *         when one pointer is NULL, also returns false
  */
-bool compareWorld(char **world, char **newWorld) {
+bool compareWorld(char **world, char **newWorld, unsigned int row, unsigned int column) {
+    if (world == NULL || newWorld == NULL){
+        return false;
+    }
+    if (*world == NULL || *newWorld == NULL){
+        return false;
+    }
+    if (row == 0 || column == 0){
+        return false;
+    }
     int numEqual = 0;
     for (int i = 0; i < row; i++) {
         for (int j = 0; j < column; j++) {
@@ -117,6 +129,7 @@ char **nextGeneration(char **world) {
  * @return nothing
  */
 void game(char *fileName, char **world) {
+    // print the world
 
     char *evolveNumberString = (char *) malloc(sizeof(char) * 120);
     printf("Please enter the number of steps to evolve\n(enter the letter 'q' means not to specify the number)\n->");
@@ -185,7 +198,7 @@ void game(char *fileName, char **world) {
             if (!pause) {
                 if (specifyEvolve == -1) {
                     newWorld = nextGeneration(world);
-                    if (compareWorld(world, newWorld)) {
+                    if (compareWorld(world, newWorld, row, column)) {
                         printf("A total of %d rounds of cell evolution is stabilized.\n", steps);
                         freeWorld(newWorld);
                         while (SDL_WaitEvent(&e)) {
@@ -218,7 +231,7 @@ void game(char *fileName, char **world) {
                     steps++;
                 } else {
                     newWorld = nextGeneration(world);
-                    if (compareWorld(world, newWorld)) {
+                    if (compareWorld(world, newWorld, row, column)) {
                         printf("A total of %d rounds of cell evolution is stabilized.\n", steps);
                         freeWorld(newWorld);
                         while (SDL_WaitEvent(&e)) {

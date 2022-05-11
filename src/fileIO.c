@@ -18,20 +18,27 @@
  * @return a 2-dimensional array which contains the information of live states of cells
  */
 char **readWorld(char *fileName, unsigned int row, unsigned int column) {
+    if (row == 0 || column == 0){
+        return NULL;
+    }
     char **world = (char **) malloc(sizeof(char *) * row);
     for (int i = 0; i < row; i++) {
         world[i] = (char *) malloc(sizeof(char) * column);
     }
     FILE *file = fopen(fileName, "r");
-    fscanf(file, "%u %u\n", &row, &column);
-    for (int i = 0; i < row; i++) {
-        for (int j = 0; j < column; j++) {
-            world[i][j] = fgetc(file);
-            fgetc(file);
+    if (!file){
+        return NULL;
+    }else{
+        fscanf(file, "%u %u\n", &row, &column);
+        for (int i = 0; i < row; i++) {
+            for (int j = 0; j < column; j++) {
+                world[i][j] = fgetc(file);
+                fgetc(file);
+            }
         }
+        fclose(file);
+        return world;
     }
-    fclose(file);
-    return world;
 }
 
 /**
@@ -46,9 +53,16 @@ char **readWorld(char *fileName, unsigned int row, unsigned int column) {
  * @param row is the number of rows in the world which is in the interval of [0, 65535]
  * @param column is the number of columns in the world which is in the interval of [0, 65535]
  *
- * @return nothing
+ * @return 1 if successfully stored
+ *         otherwise 0
  */
-void storeWorld(char *fileName, char **world, unsigned int row, unsigned int column) {
+int storeWorld(char *fileName, char **world, unsigned int row, unsigned int column) {
+    if (fileName == NULL || world == NULL || row == 0 || column == 0){
+        return 0;
+    }
+    if (*world == NULL){
+        return 0;
+    }
     char src[50], dest[50];
 
     strcpy(dest, "output_");
@@ -58,6 +72,7 @@ void storeWorld(char *fileName, char **world, unsigned int row, unsigned int col
     FILE *file = fopen(dest, "w");
     if (!file) {
         printf("Wrong to store last generation's information to the file!\n");
+        return 0;
     } else {
         fprintf(file, "%u %u\n", row, column);
         for (int i = 0; i < row; i++) {
@@ -72,4 +87,6 @@ void storeWorld(char *fileName, char **world, unsigned int row, unsigned int col
         fclose(file);
         printf("Successfully store last generation's information to the file: %s\n", dest);
     }
+
+    return 1;
 }

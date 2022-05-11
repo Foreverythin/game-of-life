@@ -2,17 +2,7 @@
 #include "include/fileIO.h"
 #include "include/game.h"
 #include "include/interface.h"
-
-/**
- * row is the number of rows in the world which is in the interval of [0, 65535]
- * column is the number of columns in the world which is also in the interval of [0, 65535]
- */
-unsigned int row, column;
-
-/**
- * unitLength is the width of each small cell square, computed by 640.0/max(row, column)
- */
-float unitLength;
+#include "include/utility.h"
 
 /**
  * The entrance function of this game - "game of life"

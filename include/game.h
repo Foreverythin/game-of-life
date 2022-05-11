@@ -4,10 +4,11 @@
 extern unsigned int row, column;
 extern float unitLength;
 
+
 void freeWorld(char** world);
 
 //if 2 worlds are exactly same, return 1; otherwise 0.
-bool compareWorld(char** world, char** newWorld);
+bool compareWorld(char** world, char** newWorld, unsigned int row, unsigned int column);
 
 void game(char* fileName, char** world);
 

@@ -139,7 +139,7 @@
     &quot;cidr.known.project.marker&quot;: &quot;true&quot;,
     &quot;last_opened_file_path&quot;: &quot;/Users/pangyu/Documents/game-of-life&quot;,
     &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;CPPToolchains&quot;
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;
   }
 }</component>
   <component name="RecentsManager">
@@ -147,33 +147,68 @@
       <recent name="$PROJECT_DIR$/src" />
     </key>
   </component>
-  <component name="RunManager" selected="Makefile Application.all">
-    <configuration name="all" type="CLionNativeAppRunConfigurationType" PROGRAM_PARAMS="game2.txt" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="game-of-life" TARGET_NAME="all" CONFIG_NAME="all" version="1" RUN_PATH="$PROJECT_DIR$/bin/GameOfLife">
+  <component name="RunManager" selected="Makefile Target.all (1)">
+    <configuration name="all" type="CLionNativeAppRunConfigurationType" PROGRAM_PARAMS="game1.txt" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="game-of-life" TARGET_NAME="all" CONFIG_NAME="all" version="1" RUN_PATH="$PROJECT_DIR$/bin/GameOfLife">
       <method v="2">
         <option name="CLION.COMPOUND.BUILD" enabled="true" />
       </method>
     </configuration>
-    <configuration name="all" type="MAKEFILE_TARGET_RUN_CONFIGURATION" factoryName="Makefile" temporary="true">
-      <makefile filename="$PROJECT_DIR$/Makefile" target="all" workingDirectory="" arguments="">
+    <configuration name="all_test" type="CLionNativeAppRunConfigurationType" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="game-of-life" TARGET_NAME="all" CONFIG_NAME="all" version="1" RUN_PATH="$PROJECT_DIR$/test/bin/test">
+      <method v="2">
+        <option name="CLION.COMPOUND.BUILD" enabled="true" />
+      </method>
+    </configuration>
+    <configuration default="true" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" PASS_PARENT_ENVS_2="true">
+      <method v="2">
+        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="all (1)" type="MAKEFILE_TARGET_RUN_CONFIGURATION" factoryName="Makefile" temporary="true">
+      <makefile filename="$PROJECT_DIR$/test/Makefile" target="all" workingDirectory="" arguments="">
         <envs />
       </makefile>
       <method v="2" />
     </configuration>
-    <configuration name="clean" type="MAKEFILE_TARGET_RUN_CONFIGURATION" factoryName="Makefile" temporary="true">
+    <configuration name="clean (1)" type="MAKEFILE_TARGET_RUN_CONFIGURATION" factoryName="Makefile" temporary="true">
       <makefile filename="$PROJECT_DIR$/Makefile" target="clean" workingDirectory="" arguments="">
         <envs />
       </makefile>
       <method v="2" />
     </configuration>
+    <configuration name="clean" type="MAKEFILE_TARGET_RUN_CONFIGURATION" factoryName="Makefile" temporary="true">
+      <makefile filename="$PROJECT_DIR$/test/Makefile" target="clean" workingDirectory="" arguments="">
+        <envs />
+      </makefile>
+      <method v="2" />
+    </configuration>
+    <configuration name="fileIO.o" type="MAKEFILE_TARGET_RUN_CONFIGURATION" factoryName="Makefile" temporary="true">
+      <makefile filename="$PROJECT_DIR$/test/Makefile" target="fileIO.o" workingDirectory="" arguments="">
+        <envs />
+      </makefile>
+      <method v="2" />
+    </configuration>
+    <configuration name="test.o" type="MAKEFILE_TARGET_RUN_CONFIGURATION" factoryName="Makefile" temporary="true">
+      <makefile filename="$PROJECT_DIR$/test/Makefile" target="test.o" workingDirectory="" arguments="">
+        <envs />
+      </makefile>
+      <method v="2" />
+    </configuration>
     <list>
+      <item itemvalue="Makefile Application.all_test" />
       <item itemvalue="Makefile Application.all" />
-      <item itemvalue="Makefile Target.all" />
+      <item itemvalue="Makefile Target.all (1)" />
+      <item itemvalue="Makefile Target.clean (1)" />
+      <item itemvalue="Makefile Target.test.o" />
       <item itemvalue="Makefile Target.clean" />
+      <item itemvalue="Makefile Target.fileIO.o" />
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="Makefile Target.all" />
+        <item itemvalue="Makefile Target.all (1)" />
         <item itemvalue="Makefile Target.clean" />
+        <item itemvalue="Makefile Target.clean (1)" />
+        <item itemvalue="Makefile Target.test.o" />
+        <item itemvalue="Makefile Target.fileIO.o" />
       </list>
     </recent_temporary>
   </component>
@@ -207,7 +242,14 @@
       <workItem from="1651739976526" duration="881000" />
       <workItem from="1651814376407" duration="141000" />
       <workItem from="1651814695117" duration="554000" />
-      <workItem from="1651907928445" duration="7710000" />
+      <workItem from="1651907928445" duration="8322000" />
+      <workItem from="1651916885348" duration="1000" />
+      <workItem from="1651926629083" duration="49000" />
+      <workItem from="1651978914283" duration="1034000" />
+      <workItem from="1652196101876" duration="117000" />
+      <workItem from="1652196852154" duration="1293000" />
+      <workItem from="1652230263600" duration="10255000" />
+      <workItem from="1652259774442" duration="5114000" />
     </task>
     <servers />
   </component>
