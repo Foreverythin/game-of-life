@@ -24,8 +24,6 @@ void freeWorld(char **world) {
     }
     free(world);
     world = NULL;
-
-
 }
 
 /**
@@ -261,7 +259,7 @@ void game(char *fileName, char **world) {
                             }
                         }
                     } else if (leftEvolve == 0) {
-                        printf("按照要求，一共迭代了%d次。\n", specifyEvolve);
+                        printf("According to the requirements, a total of %d iterations were made.\n", specifyEvolve);
                         freeWorld(newWorld);
                         while (SDL_WaitEvent(&e)) {
                             switch (e.type) {

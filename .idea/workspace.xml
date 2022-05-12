@@ -147,7 +147,7 @@
       <recent name="$PROJECT_DIR$/src" />
     </key>
   </component>
-  <component name="RunManager" selected="Makefile Target.all (1)">
+  <component name="RunManager" selected="Makefile Application.all">
     <configuration name="all" type="CLionNativeAppRunConfigurationType" PROGRAM_PARAMS="game3.txt" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="game-of-life" TARGET_NAME="all" CONFIG_NAME="all" version="1" RUN_PATH="$PROJECT_DIR$/bin/GameOfLife">
       <method v="2">
         <option name="CLION.COMPOUND.BUILD" enabled="true" />
@@ -156,11 +156,6 @@
     <configuration name="all_test" type="CLionNativeAppRunConfigurationType" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="game-of-life" TARGET_NAME="all" CONFIG_NAME="all" version="1" RUN_PATH="$PROJECT_DIR$/test/bin/test">
       <method v="2">
         <option name="CLION.COMPOUND.BUILD" enabled="true" />
-      </method>
-    </configuration>
-    <configuration default="true" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" PASS_PARENT_ENVS_2="true">
-      <method v="2">
-        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
       </method>
     </configuration>
     <configuration name="all (1)" type="MAKEFILE_TARGET_RUN_CONFIGURATION" factoryName="Makefile" temporary="true">
@@ -249,7 +244,8 @@
       <workItem from="1652196101876" duration="117000" />
       <workItem from="1652196852154" duration="1293000" />
       <workItem from="1652230263600" duration="10255000" />
-      <workItem from="1652259774442" duration="8998000" />
+      <workItem from="1652259774442" duration="9084000" />
+      <workItem from="1652331553430" duration="976000" />
     </task>
     <servers />
   </component>

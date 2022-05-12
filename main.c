@@ -31,6 +31,11 @@ int main(int argc, char **argv) {
             return -1;
         } else {
             fscanf(file, "%u %u", &row, &column);
+            if (row == 0 || column == 0){
+                printf("The row and column must be larger than 0!\n");
+                fclose(file);
+                return -1;
+            }
             unitLength = (640.0f/(float)row>640.0f/(float)column)?(640.0f/(float)column):(640.0f/(float)row);
             fclose(file);
         }
