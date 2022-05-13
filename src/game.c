@@ -40,13 +40,13 @@ void freeWorld(char **world) {
  *         when one pointer is NULL, also returns false
  */
 bool compareWorld(char **world, char **newWorld, unsigned int row, unsigned int column) {
-    if (world == NULL || newWorld == NULL){
+    if (world == NULL || newWorld == NULL) {
         return false;
     }
-    if (*world == NULL || *newWorld == NULL){
+    if (*world == NULL || *newWorld == NULL) {
         return false;
     }
-    if (row == 0 || column == 0){
+    if (row == 0 || column == 0) {
         return false;
     }
     int numEqual = 0;
@@ -76,10 +76,10 @@ bool compareWorld(char **world, char **newWorld, unsigned int row, unsigned int 
  *         NULL if world points to NULL or *world points to NULL
  */
 char **nextGeneration(char **world) {
-    if (world == NULL){
+    if (world == NULL) {
         return NULL;
     }
-    if (*world == NULL){
+    if (*world == NULL) {
         return NULL;
     }
     char **newWorld = (char **) malloc(sizeof(char *) * row);
@@ -159,30 +159,71 @@ void game(char *fileName, char **world) {
     int flag = 1;
     int tag = 1;
     int delayDuration = 50;
+    int buttonDown = 0;
+    int x, y, i, j, new_i, new_j;
     bool pause = true;
     while (!quit) {
         if (SDL_PollEvent(&e)) {
             switch (e.type) {
+                case SDL_MOUSEBUTTONDOWN:
+                    if (SDL_BUTTON_LEFT == e.button.button) {
+                        x = e.button.x;
+                        y = e.button.y;
+                        i = y / unitLength;
+                        j = x / unitLength;
+                        if (world[i][j] == '0'){
+                            world[i][j] = '1';
+                        }else{
+                            world[i][j] = '0';
+                        }
+                        drawWorld(world, row, column, unitLength);
+                        buttonDown = 1;
+                    }
+                    break;
+                case SDL_MOUSEMOTION:
+                    if (buttonDown == 1){
+                        x = e.motion.x;
+                        y = e.motion.y;
+                        new_i = y / unitLength;
+                        new_j = x / unitLength;
+                        if (new_i != i || new_j != j){
+                            if (world[new_i][new_j] == '0'){
+                                world[new_i][new_j] = '1';
+                            }else{
+                                world[new_i][new_j] = '0';
+                            }
+                        }
+                        i = new_i;
+                        j = new_j;
+                        drawWorld(world, row, column, unitLength);
+                    }
+                    break;
+                case SDL_MOUSEBUTTONUP:
+                    if (SDL_BUTTON_LEFT == e.button.button){
+
+                        buttonDown = 0;
+                    }
+                    break;
                 case SDL_QUIT:
                     quit = true;
                     break;
                 case SDL_KEYDOWN:
                     switch (e.key.keysym.sym) {
                         case SDLK_SPACE:
-                            if (pause == true){
+                            if (pause == true) {
                                 pause = false;
-                            }else{
+                            } else {
                                 pause = true;
                             }
                             break;
                         case SDLK_UP:
-                            if (delayDuration>=100 && delayDuration<=600){
+                            if (delayDuration >= 100 && delayDuration <= 600) {
                                 delayDuration -= 50;
                                 printf("Current delay duration: %d\n", delayDuration);
                             }
                             break;
                         case SDLK_DOWN:
-                            if (delayDuration>=50 && delayDuration<=550){
+                            if (delayDuration >= 50 && delayDuration <= 550) {
                                 delayDuration += 50;
                                 printf("Current delay duration: %d\n", delayDuration);
                             }
@@ -193,7 +234,7 @@ void game(char *fileName, char **world) {
                     }
                     break;
                 default:
-                    if (flag == 1){
+                    if (flag == 1) {
                         drawWorld(world, row, column, unitLength);
                         flag = 0;
                     }

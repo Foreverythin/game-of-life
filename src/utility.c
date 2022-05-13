@@ -1,4 +1,5 @@
 #include <string.h>
+#include <stdio.h>
 #include <stdbool.h>
 #include "../include/utility.h"
 
@@ -17,7 +18,10 @@
  *         otherwise false
  */
 bool isNumber(char* s){
-    if (s == NULL || s == ""){
+    if (s == NULL){
+        return false;
+    }
+    if (strlen(s) == 0){
         return false;
     }
     if (strspn(s, "0123456789")==strlen(s)){

@@ -2,7 +2,14 @@
 <project version="4">
   <component name="CLionExternalBuildManager">
     <target id="76549a95-1211-4cab-8869-b44fe8967a0a" name="Unnamed" defaultType="MAKE">
-      <configuration id="6b9f6ff0-784b-4acb-a6d6-d3ca03a450b3" name="Unnamed" toolchainName="Default" />
+      <configuration id="6b9f6ff0-784b-4acb-a6d6-d3ca03a450b3" name="Unnamed" toolchainName="Default">
+        <build type="MAKE">
+          <make targetName="all" />
+        </build>
+        <clean type="MAKE">
+          <make targetName="clean" />
+        </clean>
+      </configuration>
     </target>
   </component>
 </project>
