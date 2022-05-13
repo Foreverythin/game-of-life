@@ -158,7 +158,7 @@ void game(char *fileName, char **world) {
     char **newWorld = NULL;
     int flag = 1;
     int tag = 1;
-    int delayDuration = 200;
+    int delayDuration = 50;
     bool pause = true;
     while (!quit) {
         if (SDL_PollEvent(&e)) {
@@ -176,14 +176,14 @@ void game(char *fileName, char **world) {
                             }
                             break;
                         case SDLK_UP:
-                            if (delayDuration>=200 && delayDuration<=800){
-                                delayDuration -= 100;
+                            if (delayDuration>=100 && delayDuration<=600){
+                                delayDuration -= 50;
                                 printf("Current delay duration: %d\n", delayDuration);
                             }
                             break;
                         case SDLK_DOWN:
-                            if (delayDuration>=100 && delayDuration<=700){
-                                delayDuration += 100;
+                            if (delayDuration>=50 && delayDuration<=550){
+                                delayDuration += 50;
                                 printf("Current delay duration: %d\n", delayDuration);
                             }
                             break;

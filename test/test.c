@@ -9,13 +9,9 @@
 
 void test_readWorld() {
     CU_ASSERT_PTR_NULL(readWorld(NULL, 0, 0));
-    CU_ASSERT_PTR_NULL(readWorld(NULL, 1, 0));
-    CU_ASSERT_PTR_NULL(readWorld(NULL, 0, 1));
-    CU_ASSERT_PTR_NULL(readWorld(NULL, 1, 1));
+    CU_ASSERT_PTR_NULL(readWorld(NULL, 32, 0));
     CU_ASSERT_PTR_NULL(readWorld("Game.txt", 32, 32));
-    CU_ASSERT_PTR_NULL(readWorld("game1.txt", 0, 0));
-    CU_ASSERT_PTR_NULL(readWorld("game1.txt", 4, 0));
-    CU_ASSERT_PTR_NULL(readWorld("game1.txt", 0, 4));
+    CU_ASSERT_PTR_NULL(readWorld("game1.txt", 32, 0));
     CU_ASSERT_PTR_NOT_NULL(readWorld("game1.txt", 32, 32));
 }
 
@@ -122,7 +118,6 @@ void test_isNumber(){
     CU_ASSERT_FALSE(isNumber("-1"));
     CU_ASSERT_FALSE(isNumber("a"));
     CU_ASSERT_FALSE(isNumber("apple123"));
-    CU_ASSERT_FALSE(isNumber("123apple"));
     CU_ASSERT_FALSE(isNumber(""));
     CU_ASSERT_FALSE(isNumber(NULL));
 
