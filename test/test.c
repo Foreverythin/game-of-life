@@ -120,7 +120,54 @@ void test_isNumber(){
     CU_ASSERT_FALSE(isNumber("apple123"));
     CU_ASSERT_FALSE(isNumber(""));
     CU_ASSERT_FALSE(isNumber(NULL));
+}
 
+//test the function of clearScreen
+void test_clearScreen(){
+    // two new 2-dimensional arrays
+    char **world = (char **) malloc(sizeof(char *) * 3);
+    for (int i = 0; i < 3; i++) {
+        world[i] = (char *) malloc(sizeof(char) * 3);
+    }
+
+    CU_ASSERT_EQUAL(clearScreen(world), 0);
+
+    for (int i = 0; i < 3; i++) {
+        free(world[i]);
+        world[i] = NULL;
+    }
+
+    CU_ASSERT_EQUAL(clearScreen(world), -1);
+
+    free(world);
+    world = NULL;
+
+    CU_ASSERT_EQUAL(clearScreen(world), -1);
+    CU_ASSERT_EQUAL(clearScreen(NULL), -1);
+}
+
+// test the function of randomScreen
+void test_randomScreen(){
+    // two new 2-dimensional arrays
+    char **world = (char **) malloc(sizeof(char *) * 3);
+    for (int i = 0; i < 3; i++) {
+        world[i] = (char *) malloc(sizeof(char) * 3);
+    }
+
+    CU_ASSERT_EQUAL(randomScreen(world), 0);
+
+    for (int i = 0; i < 3; i++) {
+        free(world[i]);
+        world[i] = NULL;
+    }
+
+    CU_ASSERT_EQUAL(randomScreen(world), -1);
+
+    free(world);
+    world = NULL;
+
+    CU_ASSERT_EQUAL(randomScreen(world), -1);
+    CU_ASSERT_EQUAL(randomScreen(NULL), -1);
 }
 
 int main(void) {
@@ -134,11 +181,13 @@ int main(void) {
     if (NULL == pSuite) goto cleanup;
 
     /* add the tests to the suite */
-    if (NULL == CU_add_test(pSuite, "test readWorld()", test_readWorld)) goto cleanup;
-    if (NULL == CU_add_test(pSuite, "test storeWorld()", test_storeWorld)) goto cleanup;
-    if (NULL == CU_add_test(pSuite, "test compareWorld()", test_compareWorld)) goto cleanup;
-    if (NULL == CU_add_test(pSuite, "test nextGeneration()", test_nextGeneration)) goto cleanup;
-    if (NULL == CU_add_test(pSuite, "test isNumber()", test_isNumber)) goto cleanup;
+    if (NULL == CU_add_test(pSuite, "test readWorld(char *fileName, unsigned int row, unsigned int column)", test_readWorld)) goto cleanup;
+    if (NULL == CU_add_test(pSuite, "test storeWorld(char* fileName, char** world, unsigned int row, unsigned int column)", test_storeWorld)) goto cleanup;
+    if (NULL == CU_add_test(pSuite, "test compareWorld(char** world, char** newWorld, unsigned int row, unsigned int column)", test_compareWorld)) goto cleanup;
+    if (NULL == CU_add_test(pSuite, "test nextGeneration(char** world)", test_nextGeneration)) goto cleanup;
+    if (NULL == CU_add_test(pSuite, "test isNumber(char* s)", test_isNumber)) goto cleanup;
+    if (NULL == CU_add_test(pSuite, "test clearScreen(char** world)", test_clearScreen)) goto cleanup;
+    if (NULL == CU_add_test(pSuite, "test randomScreen(char** world)", test_randomScreen)) goto cleanup;
 
 
     CU_basic_set_mode(CU_BRM_VERBOSE);

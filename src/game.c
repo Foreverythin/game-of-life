@@ -125,14 +125,21 @@ char **nextGeneration(char **world) {
  * Clear the screen
  *
  * @param world a 2-dimensional array which stores the live states of cells.
- * @return nothing.
+ * @return 0 if clear successfully, otherwise -1.
  */
-void clearScreen(char **world) {
+int clearScreen(char **world) {
+    if (world == NULL){
+        return -1;
+    }else if (*world == NULL){
+        return -1;
+    }
     for (int i = 0; i < row; i++) {
         for (int j = 0; j < column; j++) {
             world[i][j] = '0';
         }
     }
+
+    return 0;
 }
 
 /**
@@ -140,9 +147,13 @@ void clearScreen(char **world) {
  * Each cell is randomly dead or alive.
  *
  * @param world a 2-dimensional array which stores the live states of cells.
- * @return nothing.
+ * @return 0 if produce a random world successfully, otherwise -1.
  */
-void randomScreen(char **world) {
+int randomScreen(char **world) {
+    if (world == NULL)
+        return -1;
+    else if (*world == NULL)
+        return -1;
     int num;
     for (int i = 0; i < row; ++i) {
         for (int j = 0; j < column; ++j) {
@@ -154,6 +165,8 @@ void randomScreen(char **world) {
             }
         }
     }
+
+    return 0;
 }
 
 /**

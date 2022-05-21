@@ -4,9 +4,9 @@
 extern unsigned int row, column;
 extern float unitLength;
 
-void clearScreen(char** world);
+int clearScreen(char** world);
 
-void randomScreen(char** world);
+int randomScreen(char** world);
 
 void freeWorld(char** world);
 
