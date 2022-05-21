@@ -120,15 +120,27 @@ char **nextGeneration(char **world) {
     return newWorld;
 }
 
-void clearScreen(char** world){
-    for (int i = 0; i < row; i++){
-        for (int j = 0; j < column; j++){
+void clearScreen(char **world) {
+    for (int i = 0; i < row; i++) {
+        for (int j = 0; j < column; j++) {
             world[i][j] = '0';
         }
     }
 }
 
-
+void randomScreen(char **world) {
+    int num;
+    for (int i = 0; i < row; ++i) {
+        for (int j = 0; j < column; ++j) {
+            num = rand() % 4;
+            if (num == 1) {
+                world[i][j] = '1';
+            } else {
+                world[i][j] = '0';
+            }
+        }
+    }
+}
 
 /**
  * Run the game using SDL2 to show the graphical interface
@@ -181,9 +193,9 @@ void game(char *fileName, char **world) {
                         y = e.button.y;
                         i = y / unitLength;
                         j = x / unitLength;
-                        if (world[i][j] == '0'){
+                        if (world[i][j] == '0') {
                             world[i][j] = '1';
-                        }else{
+                        } else {
                             world[i][j] = '0';
                         }
                         drawWorld(world, row, column, unitLength);
@@ -191,15 +203,15 @@ void game(char *fileName, char **world) {
                     }
                     break;
                 case SDL_MOUSEMOTION:
-                    if (buttonDown == 1){
+                    if (buttonDown == 1) {
                         x = e.motion.x;
                         y = e.motion.y;
                         new_i = y / unitLength;
                         new_j = x / unitLength;
-                        if (new_i != i || new_j != j){
-                            if (world[new_i][new_j] == '0'){
+                        if (new_i != i || new_j != j) {
+                            if (world[new_i][new_j] == '0') {
                                 world[new_i][new_j] = '1';
-                            }else{
+                            } else {
                                 world[new_i][new_j] = '0';
                             }
                         }
@@ -209,7 +221,7 @@ void game(char *fileName, char **world) {
                     }
                     break;
                 case SDL_MOUSEBUTTONUP:
-                    if (SDL_BUTTON_LEFT == e.button.button){
+                    if (SDL_BUTTON_LEFT == e.button.button) {
 
                         buttonDown = 0;
                     }
@@ -242,14 +254,15 @@ void game(char *fileName, char **world) {
                             quit = true;
                             break;
                         case SDLK_c:
-                            if (pause == 1){
+                            if (pause == 1) {
                                 clearScreen(world);
                                 drawWorld(world, row, column, unitLength);
                             }
                             break;
                         case SDLK_r:
-                            if (pause == 1){
-
+                            if (pause == 1) {
+                                randomScreen(world);
+                                drawWorld(world, row, column, unitLength);
                             }
                             break;
                     }
