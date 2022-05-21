@@ -186,7 +186,15 @@ void game(char *fileName, char **world) {
     // print the world
 
     char *evolveNumberString = (char *) malloc(sizeof(char) * 120);
-    printf("Please enter the number of steps to evolve\n(enter the letter 'q' means not to specify the number)\n->");
+    printf("\n----- Welcome to game of life! -----\n");
+    printf("\n[1] Enter 'SPACE' to pause or continue(begin);\n");
+    printf("[2] Enter 'UP' to speed up the evolving;\n");
+    printf("[3] Enter 'DOWN' to slow down the evolving;\n");
+    printf("[4] Enter 'c' to clear the screen;\n");
+    printf("[5] Enter 'r' to randomly generate a new world;\n");
+    printf("[6] Enter 'RIGHT' to the next generation;\n");
+    printf("[7] Enter 'ESC' to quit.\n");
+    printf("\nPlease enter the number of steps to evolve\n(enter the letter 'q' means not to specify the number)\n->");
     scanf("%s", evolveNumberString);
     while (isNumber(evolveNumberString) == false && strcmp(evolveNumberString, "q") != 0) {
         printf("Invalid choice!\nPlease enter a number or the letter 'q':\n->");
@@ -210,6 +218,7 @@ void game(char *fileName, char **world) {
     int delayDuration = 50;
     int buttonDown = 0;
     int x, y, i, j, new_i, new_j;
+    int statement_tag = 1;
     bool pause = true;
     while (!quit) {
         if (SDL_PollEvent(&e)) {
@@ -292,6 +301,18 @@ void game(char *fileName, char **world) {
                                 drawWorld(world, row, column, unitLength);
                             }
                             break;
+                        case SDLK_RIGHT:
+                            if (pause == 1 && (leftEvolve > 0 || leftEvolve == -1)){
+                                world = nextGeneration(world);
+                                if (leftEvolve != -1)
+                                    leftEvolve--;
+                                drawWorld(world, row, column, unitLength);
+                                if (leftEvolve == 0){
+                                    printf("According to the requirements, a total of %d iterations were made.\n", specifyEvolve);
+                                    statement_tag = 0;
+                                }
+                            }
+                            break;
                     }
                     break;
                 default:
@@ -361,7 +382,8 @@ void game(char *fileName, char **world) {
                             }
                         }
                     } else if (leftEvolve == 0) {
-                        printf("According to the requirements, a total of %d iterations were made.\n", specifyEvolve);
+                        if (statement_tag == 1)
+                            printf("According to the requirements, a total of %d iterations were made.\n", specifyEvolve);
                         freeWorld(newWorld);
                         while (SDL_WaitEvent(&e)) {
                             switch (e.type) {

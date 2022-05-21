@@ -148,7 +148,7 @@
       <recent name="$PROJECT_DIR$/src" />
     </key>
   </component>
-  <component name="RunManager" selected="Makefile Application.test">
+  <component name="RunManager" selected="Makefile Application.game">
     <configuration name="game" type="CLionNativeAppRunConfigurationType" PROGRAM_PARAMS="game2.txt" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="game-of-life" TARGET_NAME="all" CONFIG_NAME="all" version="1" RUN_PATH="$PROJECT_DIR$/bin/GameOfLife">
       <method v="2">
         <option name="CLION.COMPOUND.BUILD" enabled="true" />
@@ -229,7 +229,7 @@
       <workItem from="1652434600496" duration="2177000" />
       <workItem from="1652436927852" duration="6966000" />
       <workItem from="1652787979117" duration="137000" />
-      <workItem from="1653102741598" duration="3092000" />
+      <workItem from="1653102741598" duration="5097000" />
     </task>
     <servers />
   </component>
