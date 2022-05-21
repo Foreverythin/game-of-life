@@ -44,7 +44,7 @@ bool init() {
                 printf("SDL_image could not initialize! SDL_image Error: %s\n", IMG_GetError());
                 success = false;
             } else {
-                texture = loadTexture("../photo/background.png", renderer);
+                texture = loadTexture("../photo/background3.jpg", renderer);
                 if (texture == NULL) {
                     printf("Texture could not initialize! SDL Error: %s\n", SDL_GetError());
                     success = false;
