@@ -120,6 +120,16 @@ char **nextGeneration(char **world) {
     return newWorld;
 }
 
+void clearScreen(char** world){
+    for (int i = 0; i < row; i++){
+        for (int j = 0; j < column; j++){
+            world[i][j] = '0';
+        }
+    }
+}
+
+
+
 /**
  * Run the game using SDL2 to show the graphical interface
  * Users can specify the steps of iterations by entering a number, or do not specify the steps by entering a letter "q"
@@ -230,6 +240,17 @@ void game(char *fileName, char **world) {
                             break;
                         case SDLK_ESCAPE:
                             quit = true;
+                            break;
+                        case SDLK_c:
+                            if (pause == 1){
+                                clearScreen(world);
+                                drawWorld(world, row, column, unitLength);
+                            }
+                            break;
+                        case SDLK_r:
+                            if (pause == 1){
+
+                            }
                             break;
                     }
                     break;

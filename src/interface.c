@@ -85,7 +85,6 @@ SDL_Texture *loadTexture(char *path, SDL_Renderer *renderer) {
             return NULL;
         }
     }
-
     return gTexture;
 }
 
