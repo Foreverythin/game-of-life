@@ -120,6 +120,13 @@ char **nextGeneration(char **world) {
     return newWorld;
 }
 
+/**
+ * Make each cell dead
+ * Clear the screen
+ *
+ * @param world a 2-dimensional array which stores the live states of cells.
+ * @return nothing.
+ */
 void clearScreen(char **world) {
     for (int i = 0; i < row; i++) {
         for (int j = 0; j < column; j++) {
@@ -128,6 +135,13 @@ void clearScreen(char **world) {
     }
 }
 
+/**
+ * Produce a random world.
+ * Each cell is randomly dead or alive.
+ *
+ * @param world a 2-dimensional array which stores the live states of cells.
+ * @return nothing.
+ */
 void randomScreen(char **world) {
     int num;
     for (int i = 0; i < row; ++i) {
