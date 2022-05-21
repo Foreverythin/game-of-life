@@ -15,15 +15,23 @@
  * returns nothing
  *
  * @param world is a 2-dimensional array which stores the live states of cells.
- * @return nothing
+ * @return 0 if free successfully, otherwise -1.
  */
-void freeWorld(char **world) {
+int freeWorld(char **world) {
+    if (world == NULL) {
+        return -1;
+    }
+    if (*world == NULL) {
+        return -1;
+    }
     for (int i = 0; i < row; i++) {
         free(world[i]);
         world[i] = NULL;
     }
     free(world);
     world = NULL;
+
+    return 0;
 }
 
 /**
@@ -180,11 +188,14 @@ int randomScreen(char **world) {
  *
  * @param fileName the name of the file which is the second parameter in the terminal.
  * @param world a 2-dimensional array which stores the live states of cells.
- * @return nothing
+ * @return 0 if run successfully, otherwise -1;
  */
-void game(char *fileName, char **world) {
-    // print the world
-
+int game(char *fileName, char **world) {
+    if (fileName == NULL || world == NULL){
+        return -1;
+    }else if (*world == NULL){
+        return -1;
+    }
     char *evolveNumberString = (char *) malloc(sizeof(char) * 120);
     printf("\n----- Welcome to game of life! -----\n");
     printf("\n[1] Enter 'SPACE' to pause or continue(begin);\n");
@@ -424,4 +435,6 @@ void game(char *fileName, char **world) {
 
     free(evolveNumberString);
     evolveNumberString = NULL;
+
+    return 0;
 }

@@ -170,6 +170,36 @@ void test_randomScreen(){
     CU_ASSERT_EQUAL(randomScreen(NULL), -1);
 }
 
+// test the function of freeWorld
+void test_freeWorld(){
+    // two new 2-dimensional arrays
+    char **world = (char **) malloc(sizeof(char *) * 3);
+    for (int i = 0; i < 3; i++) {
+        world[i] = (char *) malloc(sizeof(char) * 3);
+    }
+
+    CU_ASSERT_EQUAL(freeWorld(world), 0);
+    CU_ASSERT_EQUAL(freeWorld(NULL), -1);
+}
+
+//test the function of game
+void test_game(){
+    char* fileName = (char*) malloc(sizeof (char )*4);
+    fileName = "test";
+    char **world = (char **) malloc(sizeof(char *) * 3);
+    for (int i = 0; i < 3; i++) {
+        world[i] = (char *) malloc(sizeof(char) * 3);
+    }
+    CU_ASSERT_EQUAL(game(fileName, world), 0);
+    CU_ASSERT_EQUAL(game(NULL, world), -1);
+    CU_ASSERT_EQUAL(game(fileName, NULL), -1);
+    CU_ASSERT_EQUAL(game(NULL, NULL), -1);
+
+    free(fileName);
+    fileName = NULL;
+    freeWorld(world);
+}
+
 int main(void) {
     /* initialize the CUnit test registry */
     if (CUE_SUCCESS != CU_initialize_registry()) {
@@ -188,7 +218,8 @@ int main(void) {
     if (NULL == CU_add_test(pSuite, "test isNumber(char* s)", test_isNumber)) goto cleanup;
     if (NULL == CU_add_test(pSuite, "test clearScreen(char** world)", test_clearScreen)) goto cleanup;
     if (NULL == CU_add_test(pSuite, "test randomScreen(char** world)", test_randomScreen)) goto cleanup;
-
+    if (NULL == CU_add_test(pSuite, "test freeWorld(char** world)", test_freeWorld)) goto cleanup;
+    if (NULL == CU_add_test(pSuite, "test game(char* fileName, char** world)", test_game)) goto cleanup;
 
     CU_basic_set_mode(CU_BRM_VERBOSE);
 
