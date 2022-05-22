@@ -3,7 +3,10 @@
 #### Description
 This project is a game about “Conway’s game of life” using C language and the SDL2library. Based on the original rules, the project displays the animations of each evolution step in a window, white blocks replacing alive cells and other blocks replacing dead cells. Each game needs a file to load the initial state of the world and another file to record the last state of the world.
 
+
+
 #### Project Architecture
+
 ![IMG_AD153D212763-1](README.assets/IMG_AD153D212763-1.jpeg)
 
 
@@ -27,6 +30,8 @@ This project is a game about “Conway’s game of life” using C language and 
    3. ./bin/test   (In windows, run '.\bin\test')
    ```
 
+
+
 #### How to play:
 
 ```
@@ -41,5 +46,14 @@ This project is a game about “Conway’s game of life” using C language and 
 + The game has 2 modes; one is make it run without specification of numbers of generations, and the other is make it run with specification of numbers of generations.
 + After running, the result world will be stored in the bin directory.
 
+
+
 #### Git log screen:
 
+<img src="README.assets/image-20220522141256157.png" alt="image-20220522141256157" style="zoom:50%;" />
+
+<img src="README.assets/image-20220522141322556.png" alt="image-20220522141322556" style="zoom:50%;" />
+
+<img src="README.assets/image-20220522141352496.png" alt="image-20220522141352496" style="zoom:50%;" />
+
+<img src="README.assets/image-20220522141404749.png" alt="image-20220522141404749" style="zoom:50%;" />
