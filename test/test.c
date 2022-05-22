@@ -1,5 +1,5 @@
-#include <CUnit/CUnit.h>
-#include <CUnit/Basic.h>
+#include "../include/CUnit/CUnit.h"
+#include "../include/CUnit/Basic.h"
 #include <stdlib.h>
 #include "../include/fileIO.h"
 #include "../include/game.h"

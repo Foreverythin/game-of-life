@@ -8,11 +8,14 @@ SRC_DIR = src
 SRC = main.c $(SRC_DIR)/fileIO.c $(SRC_DIR)/game.c $(SRC_DIR)/utility.c $(SRC_DIR)/interface.c
 
 INCLUDE_DIR = ./include
-LIB_DIR1 = /opt/homebrew/Cellar/sdl2/2.0.20/lib
-LIB_DIR2 = /opt/homebrew/Cellar/sdl2_image/2.0.5/lib
+LIB_DIR = ./lib
 LIB1 = SDL2
 LIB2 = SDL2_image
-LINKS = -L$(LIB_DIR1) -l$(LIB1) -L$(LIB_DIR2) -l$(LIB2)
+#LIB_DIR1 = /opt/homebrew/Cellar/sdl2/2.0.20/lib
+#LIB_DIR2 = /opt/homebrew/Cellar/sdl2_image/2.0.5/lib
+#LIB1 = SDL2
+#LIB2 = SDL2_image
+LINKS = -L$(LIB_DIR) -l$(LIB1) -L$(LIB_DIR) -l$(LIB2)
 
 # generic build details
 
