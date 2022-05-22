@@ -17,7 +17,7 @@ This project is a game about “Conway’s game of life” using C language and 
 
 2. The test directory stores the files which can do the unit testing of the project "GameOfLife". (**DON'T move or modify any file in the test directory!!**)
 
-   **To test: **
+   **To test each function: **
 
    ```
    # go to the test directory
@@ -45,6 +45,10 @@ This project is a game about “Conway’s game of life” using C language and 
 + You must give a fileName parameter, in order to specify the initial world.
 + The game has 2 modes; one is make it run without specification of numbers of generations, and the other is make it run with specification of numbers of generations.
 + After running, the result world will be stored in the bin directory.
+
+
+
+#### Git Repository：https://gitee.com/sandwich-eaters-on-the-moon/game-of-life.git
 
 
 
